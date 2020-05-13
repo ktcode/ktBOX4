@@ -25,9 +25,9 @@ hole_y = 14;
 keybase_thick = 5;
 
 A = 1;
-B = 0;
+B = 1;
 C = 1;
-D = 0;
+D = 1;
 
 if(A)
 {
@@ -47,8 +47,6 @@ difference()
         }
     }
     translate([panel_thick, panel_thick, -gap1]) cube([X, Y, Z]);
-    //SW hole
-    translate([8.5, 5.5, Z-5]) rotate([0, 0, -45]) cylinder(30, d=4.5+0.7, center=true, $fn=100);
     //code hole
     translate([-gap1, Y/2-4-4, -gap1]) cube([10, 4, Z/2]);
     //board
@@ -57,6 +55,8 @@ difference()
     //Key hole
     translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z+panel_thick-keybase_thick+gap1]) cube([(20+panel_thick*2), (20+panel_thick*2), keybase_thick]);
 }
+//SW cap base
+translate([8.5, 5.5, Z-5-1]) cylinder(8, d=10.5+2+3, $fn=100);
 //Key waku
 translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
 //Key
@@ -80,18 +80,24 @@ difference()
 {
     union()
     {
-        translate([panel_thick, (Y+panel_thick*2)-16, 5.2]) cube([3, 16, Z-5.2]);
+        translate([panel_thick, (Y+panel_thick*2)-18-1, 5.2]) cube([3, 18, Z-5.2]);
         translate([(X-3+panel_thick*2)/2-key_pitch_x/2, (Y+panel_thick*2)-14, 5.2]) cube([12, 14, Z-5.2-3-8]);
         translate([(X-3+panel_thick*2)/2-key_pitch_x/2, (Y+panel_thick*2)-11.5, Z-3-8]) cube([12, 11.5, 3+8]);
     }
     translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8+(20+panel_thick*2)/2, (Y+panel_thick*2)/2-(20+panel_thick*2)/2+(20+panel_thick*2)/2, Z-8+panel_thick+gap1]) rotate([0, 0, 45]) cylinder(8, d1=W1, d2=W2, $fn=4);
 }
 }
+//SW hole
+translate([8.5, 5.5, Z-5-5]) rotate([0, 0, -45]) cylinder(30, d=4.5+0.7, center=true, $fn=100);
+//SW cap
+translate([8.5, 5.5, Z-4]) cylinder(8, d=10.5+2, $fn=100);
+/*
 //design
 translate([0, 0, Z+panel_thick-0.4]) rotate([45, 0, 36.6]) cube([16, 1, 1]);
 translate([0, Y+panel_thick*2, Z+panel_thick-0.4]) rotate([45, 0, -36.6]) cube([16, 1, 1]);
 translate([X+panel_thick*2, 1, Z+panel_thick-0.4]) rotate([45, 0, 163.5]) cube([32, 1, 1]);
 translate([X+panel_thick*2, Y+panel_thick*2-1, Z+panel_thick-0.4]) rotate([45, 0, -163.5]) cube([32, 1, 1]);
+*/
 }
 }
 if(B)
@@ -109,7 +115,7 @@ difference()
         translate([20+13, Y-2-10.5, 0]) cube([2, 10, 3]);
     }
     //window
-    #translate([17, Y-2-10.5, -panel_thick2-gap1]) cube([15, 10, panel_thick2+gap2]);
+    translate([17, Y-2-10.5, -panel_thick2-gap1]) cube([15, 10, panel_thick2+gap2]);
     //screw
     translate([panel_thick, Y/2-8/2, -panel_thick2]) Mscrew();
     translate([X+panel_thick, Y/2+8/2, -panel_thick2]) rotate([0, 0, 180]) Mscrew();
@@ -117,16 +123,16 @@ difference()
 }
 if(C)
 {
-translate([8.5, 5.5, Z+panel_thick])
+translate([8.5, 5.5, Z+panel_thick-5])
 {
 difference()
 {
     union()
     {
-        cylinder(8, d=10.5, $fn=100);
+        cylinder(6.5, d=10.5, $fn=100);
     }
-    #translate([0, 0, -gap1]) cylinder(6, d=5.5, $fn=100);
-    #translate([0, 0, -gap1]) cylinder(2, d=8.5, $fn=100);
+    translate([0, 0, -gap1]) cylinder(6, d=5.5, $fn=100);
+    translate([0, 0, -gap1]) cylinder(2, d=8.5, $fn=100);
 }
 }
 }
