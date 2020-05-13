@@ -23,10 +23,15 @@ hole_x = 14;
 hole_y = 14;
 keybase_thick = 5;
 
-A = 1;
-B = 1;
+A = 0;
+B = 0;
+C = 1;
 
 if(A)
+{
+difference()
+{
+union()
 {
 difference()
 {
@@ -75,6 +80,13 @@ difference()
     translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8+(20+panel_thick*2)/2, (Y+panel_thick*2)/2-(20+panel_thick*2)/2+(20+panel_thick*2)/2, Z-8+panel_thick+gap1]) rotate([0, 0, 45]) cylinder(8, d1=W1, d2=W2, $fn=4);
 }
 }
+//design
+translate([0, 0, Z+panel_thick-0.4]) rotate([45, 0, 36.6]) cube([16, 1, 1]);
+translate([0, Y+panel_thick*2, Z+panel_thick-0.4]) rotate([45, 0, -36.6]) cube([16, 1, 1]);
+translate([X+panel_thick*2, 0, Z+panel_thick-0.4]) rotate([45, 0, 162]) cube([32, 1, 1]);
+translate([X+panel_thick*2, Y+panel_thick*2, Z+panel_thick-0.4]) rotate([45, 0, -162]) cube([32, 1, 1]);
+}
+}
 if(B)
 {
 difference()
@@ -91,9 +103,69 @@ difference()
     translate([X+panel_thick, Y/2+8/2, -panel_thick2]) rotate([0, 0, 180]) Mscrew();
 }
 }
+if(C)
+{
+translate([0, 50, 0])
+{
+difference()
+{
+    union()
+    {
+        //cylinder(20, d=6, $fn=100);
+        translate([0, 0, 2+20/2]) cube([6.5, 5,20], center=true);
+        translate([0, 0, 10]) rotate([0, 0, 0]) cube([19, 2, 5], center=true);
+        translate([0, 0, 10]) rotate([0, 0, 0]) cube([2, 19, 5], center=true);
+        translate([0, -6, 10]) rotate([0, 0, 0]) cube([19, 3, 5], center=true);
+        translate([0, 6.5, 10]) rotate([0, 0, 0]) cube([19, 3, 5], center=true);
+        translate([5.5, 0, 10]) rotate([0, 0, 0]) cube([2, 19, 5], center=true);
+        translate([-5.5, 0, 10]) rotate([0, 0, 0]) cube([2, 19, 5], center=true);
+    }
+    translate([-1.3/2, -5/2-gap1, 2-gap1]) cube([1.3, 5+gap2, 3.5]);
+    translate([-5/2, -1.4/2, 2-gap1]) cube([5, 1.4, 3.5]);
+    dai_gawa();
+}
+difference()
+{
+    dai();
+    translate([0, 0, -gap1]) scale([0.9, 0.9, 0.8]) dai();
+}
+}
+}
 
 
-
+module dai()
+{
+    hull()
+    {
+        //translate([0, -0.1, 11])
+        //rotate([5, 0, 0])
+        translate([0, 0.7, 11])
+        rotate([2.5, 0, 0])
+        {
+            minkowski()
+            {
+                cube([12.5-2, 14-2, gap1], center=true);
+                cylinder(gap1, d=2, $fn=100);
+            }
+        }
+        translate([0, 0, 0])
+        {
+            minkowski()
+            {
+                cube([18-4, 18-4, gap1], center=true);
+                cylinder(gap1, d=4, $fn=100);
+            }
+        }
+    }
+}
+module dai_gawa()
+{
+    difference()
+    {
+        translate([-30/2, -30/2, 0]) cube([30, 30, 30]);
+        translate([0, 0, -gap1])dai();
+    }
+}
 
 
 module key( x, y, w=1 ){
