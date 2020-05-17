@@ -27,7 +27,8 @@ keybase_thick = 5;
 A = 1;
 B = 1;
 C = 1;
-D = 1;
+D = 0; //not use
+E = 1;
 
 if(A)
 {
@@ -56,7 +57,7 @@ difference()
     translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z+panel_thick-keybase_thick+gap1]) cube([(20+panel_thick*2), (20+panel_thick*2), keybase_thick]);
 }
 //SW cap base
-translate([0, -10, 0]) cube([key_pitch_x+panel_thick, key_pitch_y+panel_thick, Z+panel_thick-gap1]);
+translate([0, 5+4, 0]) rotate([90, 0, 0]) cube([key_pitch_x+panel_thick, Z+panel_thick, 7+5]);
 //Key waku
 translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
 //Key
@@ -88,9 +89,8 @@ difference()
 }
 }
 //SW hole
-translate([panel_thick/2, -10+panel_thick/2, 5-gap1]) cube([key_pitch_x, key_pitch_y, Z]);
-translate([panel_thick, -10+panel_thick, -gap1]) cube([key_pitch_x-panel_thick, key_pitch_y+gap1, 5+gap1]);
-translate([key_pitch_x-gap1, panel_thick, -gap1]) cube([panel_thick+gap2, key_pitch_y/2, 5+gap1]);
+translate([panel_thick/2, 4+gap1, -gap1]) rotate([90, 0, 0]) cube([key_pitch_x, key_pitch_y, Z]);
+translate([panel_thick, 5+gap1+4, 0]) rotate([90, 0, 0]) cube([key_pitch_x-panel_thick, key_pitch_y+gap1, 5+gap1]);
 /*
 //design
 translate([0, 0, Z+panel_thick-0.4]) rotate([45, 0, 36.6]) cube([16, 1, 1]);
@@ -100,7 +100,7 @@ translate([X+panel_thick*2, Y+panel_thick*2-1, Z+panel_thick-0.4]) rotate([45, 0
 */
 }
 //SWB
-translate([panel_thick/2, -9, 5+5]) key(0,0);
+translate([1, 4, 0]) rotate([90, 0, 0]) key2(0,0);
 }
 if(B)
 {
@@ -123,19 +123,18 @@ difference()
     translate([X+panel_thick, Y/2+8/2, -panel_thick2]) rotate([0, 0, 180]) Mscrew();
 }
 //SW cap base
-translate([0, -10, -panel_thick2]) cube([key_pitch_x+panel_thick, key_pitch_y+panel_thick, panel_thick2]);
+translate([0, -3, -panel_thick2]) cube([key_pitch_x+panel_thick, 6, panel_thick2]);
 }
 if(C)
 {
-translate([panel_thick/2+key_pitch_x/2, -9+key_pitch_y/2, 5+5+4])
-rotate([0, 0, 90])
+translate([panel_thick/2+key_pitch_x/2, -9+key_pitch_y/2, 5+4])
+rotate([90, 0, 0])
 {
 difference()
 {
     union()
     {
         translate([0, 0, 2+20/2]) cube([6.5, 5,20], center=true);
-        translate([0, 1, 10]) rotate([15, 0, 0]) cube([20, 20, 5], center=true);
     }
     translate([-1/2, -5/2-gap1, 2-gap1]) cube([1, 5+gap2, 3.5]);
     translate([-5/2, -1.4/2, 2-gap1]) cube([5, 1.4, 3.5]);
@@ -168,6 +167,29 @@ difference()
 {
     dai();
     translate([0, 0, -gap1]) scale([0.9, 0.9, 0.8]) dai();
+}
+}
+}
+if(E)
+{
+translate([(X+panel_thick*2)/2-8, (Y+panel_thick*2)/2, 18])
+rotate([0, 0, 90])
+{
+difference()
+{
+    union()
+    {
+        translate([0, 0, 2+20/2]) cube([6.5, 5,20], center=true);
+        translate([0, 1, 10]) rotate([15, 0, 0]) cube([20, 20, 5], center=true);
+    }
+    translate([-1/2, -5/2-gap1, 2-gap1]) cube([1, 5+gap2, 3.5]);
+    translate([-5/2, -1.4/2, 2-gap1]) cube([5, 1.4, 3.5]);
+    dai3_gawa();
+}
+difference()
+{
+    dai3();
+    translate([0, 0, -gap1]) scale([0.9, 0.9, 0.8]) dai3();
 }
 }
 }
@@ -210,7 +232,7 @@ module dai2()
 {
     hull()
     {
-        translate([0, 0, 10])
+        translate([0, 0, 7])
         rotate([0, 0, 0])
         {
             minkowski()
@@ -235,6 +257,39 @@ module dai2_gawa()
     {
         translate([-30/2, -30/2, 0]) cube([30, 30, 30]);
         translate([0, 0, -gap1])dai2();
+    }
+}
+
+
+module dai3()
+{
+    hull()
+    {
+        translate([0, 0, 10])
+        rotate([0, 0, 0])
+        {
+            minkowski()
+            {
+                cube([17-2, 17-2, gap1], center=true);
+                cylinder(gap1, d=2, $fn=100);
+            }
+        }
+        translate([0, 0, 0])
+        {
+            minkowski()
+            {
+                cube([18-2, 18-2, gap1], center=true);
+                cylinder(gap1, d=2, $fn=100);
+            }
+        }
+    }
+}
+module dai3_gawa()
+{
+    difference()
+    {
+        translate([-30/2, -30/2, 0]) cube([30, 30, 30]);
+        translate([0, 0, -gap1])dai3();
     }
 }
 
@@ -271,6 +326,23 @@ module claw(){
             }
             translate( [-gap1, 1+gap1, -2-gap1] )
             cube( [4+gap2, 2, 3+gap2] );
+        }
+    }
+}
+module key2( x, y, w=1 ){
+    translate( [key_pitch_x*x + key_pitch_x/2 + key_pitch_x*(w - 1)/2, key_pitch_y*y + key_pitch_y/2, -(keybase_thick/2)] ){
+        difference(){
+            cube( [key_pitch_x*w, key_pitch_y, keybase_thick], center=true );
+            cube( [hole_x, hole_y, keybase_thick + gap2], center=true );
+            translate( [hole_x/2, 0, keybase_thick/2 - 1.5] )
+            rotate( [0, 0, 90] )
+            claw();
+            translate( [-hole_x/2, 0, keybase_thick/2 - 1.5] )
+            rotate( [0, 0, -90] )
+            claw();
+            translate( [0, 0, keybase_thick + 2] )
+            rotate( [180, 0, 45] )
+            cylinder( hole_y*1.1, hole_y*1.1, 0, $fn=4 );
         }
     }
 }
