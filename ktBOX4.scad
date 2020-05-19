@@ -48,8 +48,6 @@ difference()
         }
     }
     translate([panel_thick, panel_thick, -gap1]) cube([X, Y, Z]);
-    //code hole
-    translate([-gap1, Y/2-4-4, -gap1]) cube([10, 4, Z/2]);
     //board
     #translate([-gap1, Y-2, 4.5]) rotate([180, 0, 0]) board();
     translate([1.5-0.5, Y-2, 4.5]) rotate([180, 0, 0]) cube([7.5, 10+1, 7.5]);
@@ -57,13 +55,14 @@ difference()
     translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z+panel_thick-keybase_thick+gap1]) cube([(20+panel_thick*2), (20+panel_thick*2), keybase_thick]);
 }
 //SW cap base
-translate([0, 5+4, 0]) rotate([90, 0, 0]) cube([key_pitch_x+panel_thick, Z+panel_thick, 7+5]);
+translate([7+5, 21+2, 0]) rotate([90, 0, -90]) cube([key_pitch_x+panel_thick-2, Z+panel_thick, 12]);
 //Key waku
 translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
 //Key
 translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
 //screw
-translate([panel_thick, Y/2-8/2, 0]) Fscrew();
+translate([28, 11, 0]) rotate([0, 0, 90]) Fscrew();
+translate([28, 10, 0]) rotate([0, 0, 90]) cube([2, 8, 12]);
 translate([X+panel_thick, Y/2+8/2, 0]) rotate([0, 0, 180]) Fscrew();
 //Spacer1
 translate([X-0.5, Y-16, 7]) rotate([0, 45, 0]) cube([1.6, 18, 4]);
@@ -89,8 +88,11 @@ difference()
 }
 }
 //SW hole
-translate([panel_thick/2, 4+gap1, -gap1]) rotate([90, 0, 0]) cube([key_pitch_x, key_pitch_y, Z]);
-translate([panel_thick, 5+gap1+4, 0]) rotate([90, 0, 0]) cube([key_pitch_x-panel_thick, key_pitch_y+gap1, 5+gap1]);
+translate([7+5+gap1, 21, -gap1]) rotate([90, 0, -90]) cube([key_pitch_x, key_pitch_y, Z]);
+//code hole
+translate([-1, Y-7, 11]) rotate([0, 90, 0]) cylinder(7, d=6, $fn=100);
+translate([-1, Y-7-1, 11]) rotate([0, 90, 0]) cube([10, 2, 7]);
+
 /*
 //design
 translate([0, 0, Z+panel_thick-0.4]) rotate([45, 0, 36.6]) cube([16, 1, 1]);
@@ -100,7 +102,7 @@ translate([X+panel_thick*2, Y+panel_thick*2-1, Z+panel_thick-0.4]) rotate([45, 0
 */
 }
 //SWB
-translate([1, 4, 0]) rotate([90, 0, 0]) key2(0,0);
+translate([7, 21, 0]) rotate([90, 0, -90]) key2(0,0);
 }
 if(B)
 {
@@ -119,16 +121,14 @@ difference()
     //window
     translate([17, Y-2-10.5, -panel_thick2-gap1]) cube([15, 10, panel_thick2+gap2]);
     //screw
-    translate([panel_thick, Y/2-8/2, -panel_thick2]) Mscrew();
+    translate([28, 11, -panel_thick2]) rotate([0, 0, 90]) Mscrew();
     translate([X+panel_thick, Y/2+8/2, -panel_thick2]) rotate([0, 0, 180]) Mscrew();
 }
-//SW cap base
-translate([0, -3, -panel_thick2]) cube([key_pitch_x+panel_thick, 6, panel_thick2]);
 }
 if(C)
 {
-translate([panel_thick/2+key_pitch_x/2, -9+key_pitch_y/2, 5+4])
-rotate([90, 0, 0])
+translate([panel_thick/2+key_pitch_x/2-3-5, key_pitch_y/2+2, 5+4+0.5])
+rotate([90, 0, -90])
 {
 difference()
 {
