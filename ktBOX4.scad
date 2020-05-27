@@ -38,6 +38,10 @@ union()
 {
 difference()
 {
+union()
+{
+difference()
+{
     union()
     {
         translate([R/2, R/2, 0])
@@ -61,8 +65,10 @@ translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+p
 //Key
 translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
 //screw
-translate([28, 11, 0]) rotate([0, 0, 90]) Fscrew();
-translate([28, 10, 0]) rotate([0, 0, 90]) cube([2, 8, 12]);
+translate([12-2, Y/2-8/2, 0]) rotate([0, 0, 0]) Fscrew();
+translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([5, 8, 7]);
+translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([3, 8, 11.5]);
+translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([1, 8, 14]);
 translate([X+panel_thick, Y/2+8/2, 0]) rotate([0, 0, 180]) Fscrew();
 //Spacer1
 translate([X-0.5, Y-16, 7]) rotate([0, 45, 0]) cube([1.6, 18, 4]);
@@ -104,6 +110,10 @@ translate([X+panel_thick*2, Y+panel_thick*2-1, Z+panel_thick-0.4]) rotate([45, 0
 //SWB
 translate([7, 21, 0]) rotate([90, 0, -90]) key2(0,0);
 }
+translate([5+12-2, 4+Y/2-8/2, 0]) cylinder(10, 1.6, 1.6, $fn=30);
+translate([5+12-2, 4+Y/2-8/2, -gap1]) cylinder(2.4+0.15, 6.5/2+0.1, 6.5/2+0.1, $fn=6);
+}
+}
 if(B)
 {
 difference()
@@ -121,7 +131,7 @@ difference()
     //window
     translate([17, Y-2-10.5, -panel_thick2-gap1]) cube([15, 10, panel_thick2+gap2]);
     //screw
-    translate([28, 11, -panel_thick2]) rotate([0, 0, 90]) Mscrew();
+    translate([12-2, Y/2-8/2, -panel_thick2]) rotate([0, 0, 0]) Mscrew();
     translate([X+panel_thick, Y/2+8/2, -panel_thick2]) rotate([0, 0, 180]) Mscrew();
 }
 }
