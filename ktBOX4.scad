@@ -24,6 +24,18 @@ hole_x = 14;
 hole_y = 14;
 keybase_thick = 5;
 
+
+A1 = 0;
+A2 = 0;
+if(A2)
+{
+//part
+//Key waku
+translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
+//Key
+translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
+}
+
 A = 1;
 B = 1;
 C = 1;
@@ -60,14 +72,17 @@ difference()
 }
 //SW cap base
 translate([7+5, 21+2, 0]) rotate([90, 0, -90]) cube([key_pitch_x+panel_thick-2, Z+panel_thick, 12]);
+if(A1==0)
+{
 //Key waku
 translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
 //Key
 translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
+}
 //screw
 translate([12-2, Y/2-8/2, 0]) rotate([0, 0, 0]) Fscrew();
 translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([5, 8, 7]);
-translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([3, 8, 11.5]);
+translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([3, 8, 11.4]);
 translate([12, Y/2-8/2, 2.6]) rotate([0, 0, 0]) cube([1, 8, 14]);
 translate([X+panel_thick, Y/2+8/2, 0]) rotate([0, 0, 180]) Fscrew();
 //Spacer1
@@ -106,12 +121,27 @@ translate([0, Y+panel_thick*2, Z+panel_thick-0.4]) rotate([45, 0, -36.6]) cube([
 translate([X+panel_thick*2, 1, Z+panel_thick-0.4]) rotate([45, 0, 163.5]) cube([32, 1, 1]);
 translate([X+panel_thick*2, Y+panel_thick*2-1, Z+panel_thick-0.4]) rotate([45, 0, -163.5]) cube([32, 1, 1]);
 */
+
+if(A1)
+{
+//for part diff
+//Key waku
+translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
+//Key
+translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
+}
+
 }
 //SWB
 translate([7, 21, 0]) rotate([90, 0, -90]) key2(0,0);
 }
 translate([5+12-2, 4+Y/2-8/2, 0]) cylinder(10, 1.6, 1.6, $fn=30);
 translate([5+12-2, 4+Y/2-8/2, -gap1]) cylinder(2.4+0.15, 6.5/2+0.1, 6.5/2+0.1, $fn=6);
+if(A1==1)
+{
+//Key waku
+translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1]) waku();
+}
 }
 }
 if(B)
