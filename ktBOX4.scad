@@ -36,11 +36,12 @@ translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+p
 translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
 }
 
-A = 1;
-B = 1;
-C = 1;
+A = 0;
+B = 0;
+C = 0;
 D = 0; //not use
-E = 1;
+E = 0;
+F = 1;
 
 if(A)
 {
@@ -233,7 +234,30 @@ difference()
 }
 }
 }
-
+if(F)
+{
+translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+panel_thick*2)/2, Z-8+gap1+6])
+difference()
+{
+    union()
+    {
+        translate([-1.5, -1.5, 1]) cube([27, 27, 10]);
+    }
+    //Key waku
+    translate([0, 0, 0]) waku();
+    
+    translate([27/2-1.5, 27/2-1.5, 1+gap1]) rotate([0, 0, 45]) cylinder(8+panel_thick, d1=W1+panel_thick*2-2, d2=W2+panel_thick*2-6, $fn=4);
+    translate([-10, -5, 0]) cube([50, 5, 10]);
+    translate([-10, -4, -5]) cube([50, 5, 10]);
+    translate([-10, 27-3, 0]) cube([50, 5, 10]);
+    translate([-10, 27-4, -5]) cube([50, 5, 10]);
+    translate([-5, -10, 0]) cube([5, 50, 10]);
+    translate([-4, -10, -5]) cube([5, 50, 10]);
+    translate([27-3, -10, 0]) cube([5, 50, 10]);
+    translate([27-4, -10, -5]) cube([5, 50, 10]);
+    translate([-10, -10, -5]) cube([50, 50, 10]);
+}
+}
 
 module dai()
 {
