@@ -36,12 +36,12 @@ translate([(X+panel_thick*2)/2-(20+panel_thick*2)/2-8, (Y+panel_thick*2)/2-(20+p
 translate([(X+panel_thick*2)/2-key_pitch_x/2-8, (Y+panel_thick*2)/2-key_pitch_y/2, Z+panel_thick-8]) key(0,0);
 }
 
-A = 0;
+A = 1;
 B = 0;
 C = 0;
 D = 0; //not use
 E = 0;
-F = 1;
+F = 0; //not use
 
 if(A)
 {
@@ -73,6 +73,7 @@ difference()
 }
 //SW cap base
 translate([7+5, 21+2, 0]) rotate([90, 0, -90]) cube([key_pitch_x+panel_thick-2, Z+panel_thick, 12]);
+translate([2, 2, Z-panel_thick]) cube([10, 2, panel_thick]);
 if(A1==0)
 {
 //Key waku
@@ -90,7 +91,7 @@ translate([X+panel_thick, Y/2+8/2, 0]) rotate([0, 0, 180]) Fscrew();
 translate([X-0.5, Y-16, 7]) rotate([0, 45, 0]) cube([1.6, 18, 4]);
 translate([X-0.5, Y-16, 0]) cube([3, 18, 7]);
 //Spacer2
-translate([X+2.4, Y-1, 7]) rotate([0, 45, 90]) cube([2.5, 10, 4.2]);
+#translate([X+2.4-0.5, Y-1, 7]) rotate([0, 45, 90]) cube([2.5, 10-0.5, 4.2]);
 translate([X+2.4, Y-1, 0]) rotate([0, 0, 90]) cube([4, 10, 7]);
 //base
 translate([X+panel_thick-2, (Y+panel_thick*2)/2-Y/2, Z+panel_thick-keybase_thick]) cube([2, Y, keybase_thick]);
@@ -256,6 +257,11 @@ difference()
     translate([27-3, -10, 0]) cube([5, 50, 10]);
     translate([27-4, -10, -5]) cube([5, 50, 10]);
     translate([-10, -10, -5]) cube([50, 50, 10]);
+    translate([-10, -10, 8.6]) rotate([-45, 0, 0]) cube([50, 5, 10]);
+    translate([-10, 26.9, 8.6]) rotate([45, 0, 0]) cube([50, 5, 10]);
+    translate([-10, -10, 8.6]) rotate([0, 45, 0]) cube([5, 50, 10]);
+    translate([26.9, -10, 8.6]) rotate([0, -45, 0]) cube([5, 50, 10]);
+    
 }
 }
 
